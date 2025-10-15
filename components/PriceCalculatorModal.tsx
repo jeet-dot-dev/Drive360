@@ -18,15 +18,17 @@ const PriceCalculatorModal = ({ isOpen, onClose }: PriceCalculatorModalProps) =>
   const [duration, setDuration] = React.useState<number>(3);
   const [result, setResult] = React.useState<CalculatorResult | null>(null);
 
-  // Base pricing logic - you can adjust these rates
-  const baseRatePerInvite = 25; // $25 per invite
-  const baseRatePerDay = 150; // $150 per day
+  // Pricing configuration
+  const baseRatePerInvite = 25; 
+  const baseRatePerDay = 150; 
 
   React.useEffect(() => {
+    // Calculate costs based on user inputs
     const inviteCost = invites * baseRatePerInvite;
     const durationCost = duration * baseRatePerDay;
     const totalCost = inviteCost + durationCost;
     
+    // Derive per-unit costs for analysis
     const costPerInvite = totalCost / invites;
     const costPerDay = totalCost / duration;
 

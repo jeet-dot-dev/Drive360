@@ -18,7 +18,7 @@ const Page = () => {
 
   const handleThumbnailClick = (index: number) => {
     setCurrentIndex(index);
-    // Auto-scroll thumbnails to keep current image visible
+    // Keep selected thumbnail visible in the thumbnail strip
     if (index < thumbnailStartIndex) {
       setThumbnailStartIndex(index);
     } else if (index >= thumbnailStartIndex + thumbnailsPerView) {
@@ -31,7 +31,7 @@ const Page = () => {
   };
 
   const handle360Click = () => {
-    // Placeholder for 360 view functionality
+    // Future feature implementation
     alert("360° View feature will be implemented later!");
   };
 
@@ -56,7 +56,7 @@ const Page = () => {
       if (event.key === 'ArrowLeft') {
         const newIndex = currentIndex === 0 ? carImages.length - 1 : currentIndex - 1;
         setCurrentIndex(newIndex);
-        // Auto-scroll thumbnails to keep current image visible
+        // Keep current image visible in thumbnail strip
         if (newIndex < thumbnailStartIndex) {
           setThumbnailStartIndex(newIndex);
         } else if (newIndex >= thumbnailStartIndex + thumbnailsPerView) {
@@ -65,7 +65,7 @@ const Page = () => {
       } else if (event.key === 'ArrowRight') {
         const newIndex = currentIndex === carImages.length - 1 ? 0 : currentIndex + 1;
         setCurrentIndex(newIndex);
-        // Auto-scroll thumbnails to keep current image visible
+        // Keep current image visible in thumbnail strip
         if (newIndex < thumbnailStartIndex) {
           setThumbnailStartIndex(newIndex);
         } else if (newIndex >= thumbnailStartIndex + thumbnailsPerView) {

@@ -15,6 +15,20 @@ export const carImages = [
     { url: "/car10.avif" },
     { url: "/car11.avif" },
     { url: "/car12.avif" },
+    { url: "/car13.avif" },
+    { url: "/car14.avif" },
+    { url: "/engine1.avif" },
+    { url: "/interior1.avif" },
+    { url: "/interior2.avif" },
+    { url: "/interior3.avif" },
+    { url: "/interior4.avif" },
+    { url: "/interior5.avif" },
+    { url: "/interior6.avif" },
+    { url: "/interior7.avif" },
+    { url: "/tyre1.avif" },
+    { url: "/tyre2.avif" },
+    { url: "/tyre3.avif" },
+    { url: "/tyre4.avif" },
 ];
 
 interface CarouselProps {
@@ -32,10 +46,9 @@ const Carousel = ({
 }: CarouselProps) => {
 
     const slides = carImages;
-
     const [internalCurrentIndex, setInternalCurrentIndex] = React.useState(0);
     
-    // Use external state if provided, otherwise use internal state
+    // Determine which state to use - external takes priority
     const currentIndex = externalCurrentIndex !== undefined ? externalCurrentIndex : internalCurrentIndex;
     const setCurrentIndex = externalSetCurrentIndex || setInternalCurrentIndex;
  
