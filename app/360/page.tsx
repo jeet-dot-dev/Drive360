@@ -12,6 +12,7 @@ const Car360Viewer = () => {
   const currentFrame = useRef(frame);
   const router = useRouter()
 
+  // Mouse event handlers
   const handleMouseDown = (e: React.MouseEvent) => {
     setIsDragging(true);
     startX.current = e.clientX;
@@ -32,13 +33,37 @@ const Car360Viewer = () => {
   const handleMouseUp = () => setIsDragging(false);
   const handleMouseLeave = () => setIsDragging(false);
 
+  // Touch event handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setIsDragging(true);
+    startX.current = e.touches[0].clientX;
+    currentFrame.current = frame;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault(); // Prevent scrolling while dragging
+    const deltaX = e.touches[0].clientX - startX.current;
+    const sensitivity = 5;
+    const frameChange = Math.floor(deltaX / sensitivity);
+    let newFrame = currentFrame.current + frameChange;
+    if (newFrame > totalFrames) newFrame = ((newFrame - 1) % totalFrames) + 1;
+    if (newFrame < 1) newFrame = totalFrames - ((1 - newFrame) % totalFrames);
+    setFrame(newFrame);
+  };
+
+  const handleTouchEnd = () => setIsDragging(false);
+
   return (
     <div
-      className="relative w-full h-screen bg-gradient-to-b from-zinc-900 to-black flex items-center justify-center overflow-hidden select-none cursor-grab"
+      className="relative w-full h-screen bg-gradient-to-b from-zinc-900 to-black flex items-center justify-center overflow-hidden select-none cursor-grab touch-none"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Back Button */}
       <button
@@ -62,7 +87,10 @@ const Car360Viewer = () => {
       </div>
 
       {/* Instructions */}
-     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 text-white px-4 py-2 rounded-lg text-sm backdrop-blur-md border border-white/20"> Drag left or right to rotate the car </div>
+     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/10 text-white px-4 py-2 rounded-lg text-sm backdrop-blur-md border border-white/20"> 
+       <span className="hidden sm:inline">Drag left or right to rotate the car</span>
+       <span className="sm:hidden">Swipe left or right to rotate the car</span>
+     </div>
     </div>
   );
 };

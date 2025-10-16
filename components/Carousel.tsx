@@ -73,30 +73,30 @@ const Carousel = ({
          <div className="absolute inset-0 bg-black/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
          
          {/* Top Right Action Buttons */}
-         <div className="absolute top-4 left-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+         <div className="absolute top-4 left-4 flex gap-2 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-300">
            <button
              onClick={on360Click}
-             className="bg-black/30 hover:bg-black/50 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 backdrop-blur-sm flex items-center gap-2"
+             className="bg-black/30 hover:bg-black/50 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 backdrop-blur-sm flex items-center gap-1 sm:gap-2"
            >
-             <RotateCcw size={16} />
-             View 360°
+             <RotateCcw size={14} className="sm:w-4 sm:h-4" />
+             <span className="hidden xs:inline sm:inline">View</span> 360°
            </button>
            <button
              onClick={onFullscreenClick}
-             className="bg-black/30 hover:bg-black/50 text-white px-3 py-2 rounded-lg text-sm font-medium transition-all duration-200 hover:scale-105 backdrop-blur-sm flex items-center gap-2"
+             className="bg-black/30 hover:bg-black/50 text-white px-2 py-1.5 sm:px-3 sm:py-2 rounded-lg text-xs sm:text-sm font-medium transition-all duration-200 hover:scale-105 backdrop-blur-sm flex items-center gap-1 sm:gap-2"
            >
-             <Maximize size={16} />
-             Fullscreen
+             <Maximize size={14} className="sm:w-4 sm:h-4" />
+             <span className="hidden xs:inline sm:inline">Full</span>
            </button>
          </div>
          
          {/* left arrow */}
-         <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-2 sm:left-5 text-xl sm:text-2xl rounded-full p-1 sm:p-2 bg-black/30 text-white cursor-pointer hover:bg-black/50 transition-all duration-200 hover:scale-110 backdrop-blur-sm'>
-            <ChevronLeft onClick={prevSlide} size={24} className="sm:w-[30px] sm:h-[30px]"/>
+         <div className='block opacity-70 sm:hidden sm:group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-2 sm:left-5 text-xl sm:text-2xl rounded-full p-1 sm:p-2 bg-black/30 text-white cursor-pointer hover:bg-black/50 transition-all duration-200 hover:scale-110 backdrop-blur-sm'>
+            <ChevronLeft onClick={prevSlide} size={20} className="sm:w-[24px] sm:h-[24px] lg:w-[30px] lg:h-[30px]"/>
          </div>
          {/* right arrow */}
-         <div className='hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-2 sm:right-5 text-xl sm:text-2xl rounded-full p-1 sm:p-2 bg-black/30 text-white cursor-pointer hover:bg-black/50 transition-all duration-200 hover:scale-110 backdrop-blur-sm'>
-            <ChevronRight onClick={nextSlide} size={24} className="sm:w-[30px] sm:h-[30px]"/>
+         <div className='block opacity-70 sm:hidden sm:group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-2 sm:right-5 text-xl sm:text-2xl rounded-full p-1 sm:p-2 bg-black/30 text-white cursor-pointer hover:bg-black/50 transition-all duration-200 hover:scale-110 backdrop-blur-sm'>
+            <ChevronRight onClick={nextSlide} size={20} className="sm:w-[24px] sm:h-[24px] lg:w-[30px] lg:h-[30px]"/>
          </div>
          
          {/* Image indicator dots */}
