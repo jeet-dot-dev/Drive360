@@ -1,51 +1,14 @@
 # Drive360 - Car Showcase Platform
 
-A modern, responsive car showcase platform built with Next.js and TypeScript, featuring an interactive image carousel, 360° view capabilities, and an integrated event price calculator.
+A modern car showcase platform built with Next.js and TypeScript, featuring an interactive carousel, 360° view, and price calculator.
 
 ## 🚀 Features
 
-### 1. **Interactive Image Carousel**
-- Smooth navigation with left/right arrows
-- Thumbnail gallery with horizontal scrolling
-- Keyboard navigation support (Arrow keys)
-- Image counter display
-- Hover effects and smooth transitions
-- Responsive design for all screen sizes
-
-### 2. **360° View Button**
-- Interactive button positioned on the carousel
-- Prepared for future 360° image viewing implementation
-- Smooth hover animations and visual feedback
-
-### 3. **Event Price Calculator**
-- Form-based calculator with two main parameters:
-  - **Number of Invites** (1-1000 range)
-  - **Duration of Event** (1-365 days)
-- Real-time calculation and breakdown display
-- Detailed cost analysis including:
-  - Cost per invite
-  - Cost per day
-  - Total event cost
-- Modal interface for better user experience
-- Input validation and constraints
-
-### 4. **Car Overview Section**
-- Comprehensive car details display:
-  - **Model**: BMW X1 sDrive20i xLine
-  - **Year**: 2022
-  - **Mileage**: 59K km
-  - **Price**: ₹27.50 Lakh
-- Additional information:
-  - Fuel type and transmission
-  - Location details
-  - Dealer information
-  - Fixed pricing with inclusions
-
-### 5. **Fullscreen Modal**
-- Dedicated fullscreen viewing experience
-- Full keyboard navigation support
-- Smooth image transitions
-- Easy-to-use close functionality
+- **Interactive Image Carousel** - Smooth navigation with thumbnails and keyboard support
+- **360° Car Viewer** - Fully functional drag-to-rotate car visualization
+- **Price Calculator** - Event cost calculator with invites and duration parameters
+- **Car Overview** - Complete vehicle details and specifications
+- **Fullscreen Modal** - Enhanced image viewing experience
 
 ## 🛠️ Technology Stack
 
@@ -56,40 +19,39 @@ A modern, responsive car showcase platform built with Next.js and TypeScript, fe
 - **Icons**: Lucide React
 - **Image Optimization**: Next.js Image component
 
-## 📁 Project Structure
+## 🔄 360° View Implementation
 
+The 360° car viewer is built with a sequence of 27 high-quality car images captured from different angles around the vehicle. Here's how it works:
+
+### Technical Approach
+- **Image Sequence**: 27 AVIF images (`car1.avif` to `car27.avif`) stored in `/public/360view/`
+- **Mouse Interaction**: Drag-based rotation using mouse events (mousedown, mousemove, mouseup)
+- **Frame Calculation**: Horizontal mouse movement is converted to frame changes with configurable sensitivity
+- **Smooth Transitions**: Quick frame switching (75ms) creates fluid rotation effect
+- **State Management**: React useState and useRef for tracking current frame and drag state
+
+### Key Features
+- **Drag to Rotate**: Intuitive left/right dragging to spin the car
+- **Seamless Loop**: Frames wrap around smoothly (1→27→1)
+- **Optimized Performance**: AVIF format for smaller file sizes, priority loading
+- **Responsive Design**: Scales to fit any screen size while maintaining aspect ratio
+
+### Code Highlights
+```typescript
+// Frame calculation logic
+const deltaX = e.clientX - startX.current;
+const sensitivity = 5;
+const frameChange = Math.floor(deltaX / sensitivity);
+let newFrame = currentFrame.current + frameChange;
+
+// Seamless looping
+if (newFrame > totalFrames) newFrame = ((newFrame - 1) % totalFrames) + 1;
+if (newFrame < 1) newFrame = totalFrames - ((1 - newFrame) % totalFrames);
 ```
-drive360/
-├── app/
-│   ├── page.tsx          # Main application page
-│   ├── layout.tsx        # Root layout
-│   └── globals.css       # Global styles
-├── components/
-│   ├── Carousel.tsx      # Image carousel component
-│   ├── CarOverview.tsx   # Car details display
-│   ├── FullscreenModal.tsx # Fullscreen image viewer
-│   ├── PriceCalculator.tsx # Calculator trigger component
-│   ├── PriceCalculatorModal.tsx # Calculator modal
-│   └── ui/
-│       └── separator.tsx # UI separator component
-├── public/
-│   ├── car*.avif         # Car exterior images
-│   ├── interior*.avif   # Car interior images
-│   ├── engine*.avif     # Engine bay images
-│   └── *.png, *.svg     # Logos and icons
-└── lib/
-    └── utils.ts          # Utility functions
-```
 
-## 🎨 Design Features
+The 360° view provides an immersive car browsing experience, allowing users to examine the vehicle from every angle with smooth, natural interactions.
 
-- **Modern UI**: Clean, professional interface following modern design principles
-- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
-- **Smooth Animations**: Hover effects, transitions, and micro-interactions
-- **Accessibility**: Keyboard navigation and proper ARIA labels
-- **Performance**: Optimized images and efficient React components
-
-## 🔧 Installation & Setup
+##  Installation & Setup
 
 1. **Clone the repository**
    ```bash
@@ -110,72 +72,11 @@ drive360/
 4. **Open in browser**
    Navigate to `http://localhost:3000`
 
-## 📱 Usage
-
-### Image Navigation
-- **Click thumbnails** to jump to specific images
-- **Use arrow keys** for keyboard navigation
-- **Click fullscreen button** for expanded view
-- **Hover over carousel** to reveal navigation controls
-
-### Price Calculator
-1. Click "Open Price Calculator" button
-2. Enter number of invites (1-1000)
-3. Set event duration in days (1-365)
-4. View real-time calculation breakdown
-5. Analyze cost per invite and cost per day
-
-### Car Information
-- View comprehensive car details in the overview section
-- Check pricing, specifications, and dealer information
-- See included services and fixed pricing details
-
-## 🎯 Future Enhancements
-
-- **360° View Implementation**: Interactive 360° car viewing experience
-- **Advanced Filtering**: Filter cars by price, year, fuel type
-- **Comparison Tool**: Side-by-side car comparison
-- **User Reviews**: Customer reviews and ratings system
-- **Booking System**: Test drive scheduling functionality
-
-## 📈 Performance Optimizations
-
-- **Image Optimization**: Using Next.js Image component with AVIF format
-- **Lazy Loading**: Images loaded on demand
-- **Code Splitting**: Automatic code splitting by Next.js
-- **Responsive Images**: Optimized for different screen sizes
-- **Efficient State Management**: Optimized React state updates
-
-## 🔒 Code Quality
-
-- **TypeScript**: Full type safety throughout the application
-- **ESLint**: Code quality and consistency enforcement
-- **Component Structure**: Modular, reusable component architecture
-- **Clean Code**: Well-documented and maintainable codebase
-
-## 🚀 Deployment
-
-This project is configured for easy deployment on platforms like:
-- **Vercel** (recommended)
-- **Netlify**
-- **Heroku**
-
-## 📝 Assignment Requirements Completed
+## � Assignment Requirements Completed
 
 ✅ **Picture Scroll**: Interactive carousel with smooth navigation  
-✅ **360° View Button**: Implemented with future enhancement placeholder  
+✅ **360° View**: Fully functional drag-to-rotate car viewer  
 ✅ **Price Calculator**: Form-based calculator with invites and duration parameters  
-✅ **Car Overview**: Complete car details section with model, year, mileage, and price  
+✅ **Car Overview**: Complete car details section  
 ✅ **React.js/Next.js**: Built with Next.js and React  
-✅ **Design Library**: Tailwind CSS and Radix UI implementation  
-
-## 👨‍💻 Development Notes
-
-The codebase follows React best practices with:
-- Functional components with hooks
-- Proper state management
-- Component composition
-- Responsive design patterns
-- Accessibility considerations
-
-Built with attention to user experience, performance, and maintainability.
+✅ **Design Library**: Tailwind CSS and Radix UI implementation
