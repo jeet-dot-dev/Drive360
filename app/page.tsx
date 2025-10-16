@@ -7,6 +7,7 @@ import PriceCalculatorModal from "@/components/PriceCalculatorModal";
 import { Separator } from "@/components/ui/separator";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 const Page = () => {
@@ -15,6 +16,7 @@ const Page = () => {
   const [isFullscreenOpen, setIsFullscreenOpen] = React.useState(false);
   const [isCalculatorOpen, setIsCalculatorOpen] = React.useState(false);
   const thumbnailsPerView = 5;
+  const router = useRouter();
 
   const handleThumbnailClick = (index: number) => {
     setCurrentIndex(index);
@@ -31,8 +33,7 @@ const Page = () => {
   };
 
   const handle360Click = () => {
-    // Future feature implementation
-    alert("360° View feature will be implemented later!");
+    router.push('/360');
   };
 
   const scrollThumbnailsLeft = () => {
